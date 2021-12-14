@@ -112,7 +112,7 @@ class Recogniser():
 if __name__ == "__main__":
     pygame.init()
     pygame.font.init()
-    pygame.display.set_caption("Arcade Machine")
+    pygame.display.set_caption("Digit Recogniser")
 
     os.environ['SDL_VIDEO_CENTERED'] = "True"
 
