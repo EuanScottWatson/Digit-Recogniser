@@ -13,8 +13,9 @@ x_test = tf.keras.utils.normalize(x_test, axis=1)
 def make_model():
     model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.Flatten()) # Flatten the 28x28 to 784x1
+    model.add(tf.keras.layers.Dense(280, activation=tf.nn.relu))
     model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
-    model.add(tf.keras.layers.Dense(128, activation=tf.nn.relu))
+    model.add(tf.keras.layers.Dense(60, activation=tf.nn.relu))
     model.add(tf.keras.layers.Dense(10, activation=tf.nn.softmax)) # Only 10 output nodes for 0-9 with a probability distribution of softmax
     return model
 
