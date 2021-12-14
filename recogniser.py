@@ -61,17 +61,17 @@ class Recogniser():
         if pygame.mouse.get_pressed()[0] and self.values[x][y] < 0.5:
             self.values[x][y] = 0.5
             if 0 < x < 27 and 0 < y < 27:
-                self.values[x-1][y] = min(1, self.values[x-1][y] + 0.1)
-                self.values[x+1][y] = min(1, self.values[x+1][y] + 0.1)
-                self.values[x][y-1] = min(1, self.values[x][y-1] + 0.1)
-                self.values[x][y+1] = min(1, self.values[x][y+1] + 0.1)
+                self.values[x-1][y] = min(0.5, self.values[x-1][y] + 0.4)
+                self.values[x+1][y] = min(0.5, self.values[x+1][y] + 0.4)
+                self.values[x][y-1] = min(0.5, self.values[x][y-1] + 0.4)
+                self.values[x][y+1] = min(0.5, self.values[x][y+1] + 0.4)
         elif pygame.mouse.get_pressed()[2] and self.values[x][y] > 0:
             self.values[x][y] = 0
             if 0 < x < 27 and 0 < y < 27:
-                self.values[x-1][y] = max(0, self.values[x-1][y] - 0.1)
-                self.values[x+1][y] = max(0, self.values[x+1][y] - 0.1)
-                self.values[x][y-1] = max(0, self.values[x][y-1] - 0.1)
-                self.values[x][y+1] = max(0, self.values[x][y+1] - 0.1)
+                self.values[x-1][y] = max(0, self.values[x-1][y] - 0.4)
+                self.values[x+1][y] = max(0, self.values[x+1][y] - 0.4)
+                self.values[x][y-1] = max(0, self.values[x][y-1] - 0.4)
+                self.values[x][y+1] = max(0, self.values[x][y+1] - 0.4)
 
     def events(self):
         for event in pygame.event.get():
@@ -98,7 +98,8 @@ class Recogniser():
 
     def predict(self):
         pred = self.model.predict(np.expand_dims(self.values, axis=0))
-        print(np.argmax(pred))
+        digit = np.argmax(pred[0])
+        print(str(digit) + ": {:.2%}".format(pred[0][digit]))
 
 
 if __name__ == "__main__":
