@@ -33,10 +33,11 @@ def train(model):
 
 
 def predict(model):
-    pred = model.predict(np.expand_dims(x_test[0], axis=0))
+    pred = model.predict(np.expand_dims(x_test[123], axis=0))
     print(np.argmax(pred))
 
 
 if __name__ == "__main__":
     model = make_model()
     train(model)
+    predict(model)
