@@ -6,8 +6,12 @@ import tensorflow as tf
 
 class Recogniser():
     def __init__(self) -> None:
-        self.values = np.zeros((28, 28))
         self.model = tf.keras.models.load_model('mnist.model')
+        mnist = tf.keras.datasets.mnist
+        (_, _), (train, _) = mnist.load_data()
+
+        self.mnist_data = tf.keras.utils.normalize(train, axis=1)
+
         self.values = np.array([
             [0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ],
             [0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. , 0. ],
@@ -84,6 +88,9 @@ class Recogniser():
                     self.predict()
                 if event.key == K_c:
                     self.values = np.zeros((28, 28))
+                if event.key == K_r:
+                    index = np.random.randint(0, len(self.mnist_data) - 1)
+                    self.values = self.mnist_data[index]
 
     def display_screen(self, screen):
         screen.fill((255, 255, 255))

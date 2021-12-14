@@ -7,6 +7,7 @@ python3 recogniser.py
 You can then use these events:
 ```
 c: clears the board of all you've drawn
+r: picks a random digit from the MNIST's dataset
 SPACE: makes a prediction based on what you've drawn
 ESC: quits the GUI
 
