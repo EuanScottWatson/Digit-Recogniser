@@ -66,10 +66,23 @@ def tune_hyperparameters():
 
 def load_and_predict():
     model = tf.keras.models.load_model("mnist.model")
-    pred = model.predict(np.expand_dims(x_test[123], axis=0))
-    print(np.argmax(pred))
+    pred = model.predict(x_test)
+    predictions = [np.argmax(p) for p in pred]
+    confusion = np.zeros((10, 10))
+    for p, a in zip(predictions, y_test):
+        confusion[p][a] += 1
+
+    print("The confusion matrix:")
+    print(confusion.astype(int))
+        
 
 
 if __name__ == "__main__":
-    # tune_hyperparameters()
-    load_and_predict()
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "-train":
+            tune_hyperparameters()
+            load_and_predict()
+        else:
+            raise ValueError("Unknown flag: %s" % sys.argv[1]) from None
+    else:
+        load_and_predict()
