@@ -1,5 +1,5 @@
 # Digit Recogniser
-After completing my Intro to Machine Learning module at Imperial College London I wanted to try building a small digit recogniser using the MNIST dataset. </br>
+After completing my Intro to Machine Learning (COMP70050) module at Imperial College London I wanted to try building a small digit recogniser using the MNIST dataset. </br>
 It uses tensorflow for the model and pygame for the GUI. To run the program run:
 ```
 python3 recogniser.py
